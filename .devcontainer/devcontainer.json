@@ -1,0 +1,3 @@
+{
+    "postCreateCommand": "bash clone-repos.sh"
+}
