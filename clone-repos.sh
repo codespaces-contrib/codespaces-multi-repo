@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 script_folder="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 workspaces_folder="$(cd "${script_folder}/.." && pwd)"
 
@@ -20,7 +20,7 @@ if [ "${CODESPACES}" = "true" ]; then
     git config --global credential.helper '!f() { sleep 1; echo "username=${GH_USER}"; echo "password=${GH_TOKEN}"; }; f'
 fi
 
-if [ -f "repos-to-clone" ]; then
+if [ -f "${script_folder}/repos-to-clone.list" ]; then
     while IFS= read -r repository; do
         clone-repo "$repository"
     done < "${script_folder}/repos-to-clone.list"
