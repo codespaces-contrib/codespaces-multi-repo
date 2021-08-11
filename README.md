@@ -1,10 +1,10 @@
 # Multi-Repo Codespaces Example
 
-Generally when you are dealing with a multi-repository application, you end up with a primary "bootstrap" repository that contaains getting started information and local configuraiton files.
+When working with a multi-repository application, you ofteen have a primary "bootstrap" repository that contains getting started information and local configuraiton files. You may also have a repository for your personal work with configuration set up in it that you use to create a local environment. In both cases, you may then clone multiple repositories onto your local machine that make up your application or multiple personal repositories.
 
-GitHub Codespaces conceptually fits well into this model since you could create a Codespace from this boostrap and then clone other repositories into it. However, to improve security, Codespaces currelty provides a repository scoped token by default. However, you can use SSH keys or a personal access token instead. This sample illustrates how to configure a user secret and assign it to a Codespace so that it is used instead of the default `GITHUB_TOKEN`.
+GitHub Codespaces can conceptually work with this this model as well since you could create a Codespace from this boostrap repository and then clone other repositories into the resulting codespace. However, to improve security, Codespaces crrently limits access to other repositories through a repository scoped token by default. The good news is that you can use a personal access token instead to work around this limitation. This sample illustrates how to add a personal access token to a user-specific secret in GitHub, and assign it to a codespace for use instead of the default `GITHUB_TOKEN`.
 
-The script here will clone multiple repisotires and place them under the `/workspaces` folder in the Codespace. Anything this folder here will survive a rebuild, so this is safe to do. 
+This works by using `postCreateCommand` in `.devcontainer/devcontainer.json` to execute `clone-repos.sh`. This script will change the git credential manager to use your personal access token, and automatically clone any repositories in `repos-to-clone.list` under the `/workspaces` folder in the Codespace. Anything this folder here will survive a rebuild, so this is safe to do. 
 
 Follow these steps to use this sample:
 
