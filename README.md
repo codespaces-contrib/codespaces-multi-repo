@@ -1,6 +1,6 @@
 # Multi-Repo Codespaces Example
 
-When working with a multi-repository application, you ofteen have a primary "bootstrap" repository that contains getting started information and local configuraiton files. You may also have a repository for your personal work with configuration set up in it that you use to create a local environment. In both cases, you may then clone multiple repositories onto your local machine that make up your application or multiple personal repositories.
+When working with a multi-repository application, you often have a primary "bootstrap" repository that contains getting started information and local configuraiton files. You may also have a repository for your personal work with configuration set up in it that you use to create a local environment. In both cases, you may then clone multiple repositories onto your local machine that make up your application or multiple personal repositories.
 
 GitHub Codespaces can conceptually work with this this model as well since you could create a Codespace from this boostrap repository and then clone other repositories into the resulting codespace. However, to improve security, Codespaces crrently limits access to other repositories through a repository scoped token by default. The good news is that you can use a personal access token instead to work around this limitation. This sample illustrates how to add a personal access token to a user-specific secret in GitHub, and assign it to a codespace for use instead of the default `GITHUB_TOKEN`.
 
