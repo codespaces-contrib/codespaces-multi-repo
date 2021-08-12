@@ -1,12 +1,10 @@
 # Multi-Repo Codespaces Example
 
-When working with a multi-repository application, you often have a primary "bootstrap" repository that contains getting started information and local configuration files. You may also have a repository for your personal work that includes configuration or scripts that you use to create set up a local environment. In both cases, you may then clone multiple repositories onto your local machine that make up your application or multiple personal repositories.
+When working with a multi-repository application, you often have a primary "bootstrap" repository that contains getting started information and local configuration files. You may also have a repository for your personal work that includes configuration files or scripts that you use to set up a your machine. In both cases, you likely then clone multiple repositories onto your local machine that make up your application or multiple personal repositories.
 
-GitHub Codespaces can conceptually work with this this model as well since you can create a codespace from this bootstrap repository and then clone other repositories you need into it. However, to improve security, Codespaces currently limits access to other repositories through a repository scoped token by default. While you can expect improvements here in time, the good news is that you can use a personal access token instead to work around this limitation today. This sample illustrates how to add a personal access token to a user-specific secret in GitHub, and assign it to a codespace for use instead of the default `GITHUB_TOKEN`.
+GitHub Codespaces can conceptually work this same way since you can create a codespace from a bootstrap repository and then clone other repositories into the codespace. However, to improve security, Codespaces currently limits access to other repositories through a repository scoped token by default. While you can expect improvements here in time, the good news is that you can use a personal access token to work around this limitation today. This sample illustrates how to add a personal access token to a user-specific secret in GitHub, and assign it to a codespace for use instead of the default `GITHUB_TOKEN`, and even automatically clone other repositories.
 
 > **Note:** Part of the reason Codespaces defaults to repo scoped tokens is to limit the impact of your codespace being unknowingly compromised. For example, a repository you cloned could include a malicious tool that triggers on build. Using a personal access token as described here expands what a malicious process or stolen token can access, so only do this with repositories you trust, and consider minimizing privileges you give the token to only what you actually need.
-
-The way this sample works is by using `postCreateCommand` in `.devcontainer/devcontainer.json` to execute `clone-repos.sh`. This script will change the git credential manager to use your personal access token, and automatically clone any repositories in `repos-to-clone.list` under the `/workspaces` folder in the codespace.
 
 ## Try it
 
@@ -46,3 +44,6 @@ The `.devcontainer/devcontainer.json` file then includes a `postCreateCommand` t
 ```
 
 You can add this to any other `devcontainer.json` - this just uses the default Codespaces image rather than a custom one.
+
+When the codespace is created, `postCreateCommand` executes `clone-repos.sh`. This script changes the git credential manager to use your personal access token, and automatically clone any repositories in `repos-to-clone.list` under the `/workspaces` folder in the codespace. The entire contents of `/workspaces` survives rebuild operations, and keeping the different repositories there prevents them from getting accidently committed into the bootstrap repository.
+
