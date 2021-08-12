@@ -8,6 +8,8 @@ GitHub Codespaces can conceptually work with this this model as well since you c
 
 The way this sample works is by using `postCreateCommand` in `.devcontainer/devcontainer.json` to execute `clone-repos.sh`. This script will change the git credential manager to use your personal access token, and automatically clone any repositories in `repos-to-clone.list` under the `/workspaces` folder in the codespace.
 
+## Try it
+
 Follow these steps to try it out:
 
 1. Fork this repository
