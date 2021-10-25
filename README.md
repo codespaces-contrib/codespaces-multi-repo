@@ -12,7 +12,7 @@ Follow these steps to try it out:
 
 1. Fork this repository
 1. [Create a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-token) for use in these situations.
-1. [Create a Codespaces user secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces#adding-a-secret) called `GH_USER` with your GitHub user and `GH_TOKEN` with the personal access token you created in it. (To add a secret from github.com, click on your picture in upper-right > Settings > Codespaces tab > New secret button)
+1. [Create a Codespaces user secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces#adding-a-secret) called `GH_TOKEN` with the personal access token you created in it. (To add a secret from github.com, click on your picture in upper-right > Settings > Codespaces tab > New secret button)
 1. Give your forked repository access to the secrets when you create them.
 1. Update `repos-to-clone.list` in your fork with any repositories you want to automatically clone using this token. You can always clone manually later if you prefer.
 1. [Create a codespace](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace#creating-a-codespace) from your fork.
@@ -32,7 +32,7 @@ The main trick is two lines in `clone-repos.sh` that removes the default credent
 
 ```bash
 sudo sed -i -E 's/helper =.*//' /etc/gitconfig
-git config --global credential.helper '!f() { sleep 1; echo "username=${GH_USER}"; echo "password=${GH_TOKEN}"; }; f'
+git config --global credential.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN}"; }; f'
 ```
 
 The `.devcontainer/devcontainer.json` file then includes a `postCreateCommand` to execute the script.
