@@ -5,7 +5,7 @@ workspaces_folder="$(cd "${script_folder}/.." && pwd)"
 clone-repo()
 {
     cd "${workspaces_folder}"
-    if [ ! -d "$1" ]; then
+    if [ ! -d "${1#*/}" ]; then
         git clone "https://github.com/$1"
     else 
         echo "Already cloned $1"
