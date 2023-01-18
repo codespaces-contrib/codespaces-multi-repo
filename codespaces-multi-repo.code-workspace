@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../podCatter_FireBase"
+		},
+		{
+			"path": "../podCatter_FF"
+		}
+	],
+	"settings": {}
+}
