@@ -8,7 +8,6 @@ clone-repo()
     if [ ! -d "${1#*/}" ]; then
         echo "${1#*/}"
         git clone "https://github.com/$1"
-        code -add "$(pwd && "${1#*/}")"
     else 
         echo "Already cloned $1"
     fi
