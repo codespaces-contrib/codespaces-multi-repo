@@ -23,5 +23,6 @@ fi
 if [ -f "${script_folder}/repos-to-clone.list" ]; then
     while IFS= read -r repository; do
         clone-repo "$repository"
+        code --add "$(pwd && $repository)"
     done < "${script_folder}/repos-to-clone.list"
 fi
