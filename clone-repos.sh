@@ -6,7 +6,9 @@ clone-repo()
 {
     cd "${workspaces_folder}"
     if [ ! -d "${1#*/}" ]; then
+        echo "${1#*/}"
         git clone "https://github.com/$1"
+        # code -add "$(pwd && "${1#*/}")"
     else 
         echo "Already cloned $1"
     fi
@@ -24,4 +26,5 @@ if [ -f "${script_folder}/repos-to-clone.list" ]; then
     while IFS= read -r repository; do
         clone-repo "$repository"
     done < "${script_folder}/repos-to-clone.list"
+    
 fi
